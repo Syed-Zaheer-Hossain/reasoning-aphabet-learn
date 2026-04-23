@@ -13,20 +13,44 @@
     }
 
     body {
-      margin: 0;
       color: white;
       overflow-x: hidden;
-
-      background: 
-        linear-gradient(rgba(2,6,23,0.85), rgba(2,6,23,0.9)),
-        url('https://images.unsplash.com/photo-1518770660439-4636190af475');
-
-      background-size: cover;
-      background-position: center;
+      min-height: 100vh;
     }
 
-    .container {
-      width: 100%;
+    /* 🔥 MOBILE BG */
+    @media (max-width: 899px) {
+      body {
+        background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb');
+        background-size: cover;
+        background-position: center;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(2,6,23,0.6);
+        z-index: -1;
+      }
+    }
+
+    /* 🔥 LAYOUT */
+    .main {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .side {
+      flex: 1;
+      background: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb');
+      background-size: cover;
+      background-position: center;
+      display: none;
+    }
+
+    .content {
+      flex: 1;
       max-width: 500px;
       margin: auto;
       padding: 15px;
@@ -34,92 +58,87 @@
 
     h1 {
       text-align: center;
-      font-size: 28px;
-      background: linear-gradient(to right, orange, yellow);
+      font-size: 26px;
+      background: linear-gradient(to right, gold, orange);
       -webkit-background-clip: text;
       color: transparent;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
+    /* 🔥 GOLDEN GLOW BOX */
     .box {
-      background: rgba(17, 24, 39, 0.7);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-      margin-bottom: 20px;
+      background: rgba(17, 24, 39, 0.55);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      box-shadow:
+        0 0 20px rgba(255, 215, 0, 0.4),   /* outer glow */
+        0 0 30px rgba(255, 215, 0, 0.25),  /* spread glow */
+        0 10px 40px rgba(0,0,0,0.5);
     }
 
     select, input {
       width: 100%;
-      padding: 12px;
-      border-radius: 10px;
+      padding: 10px;
+      border-radius: 8px;
       border: none;
-      margin-top: 10px;
-      background: #020617;
+      margin-top: 8px;
+      background: rgba(2,6,23,0.8);
       color: white;
-      font-size: 16px;
       text-align: center;
+      outline: none;
     }
 
-    input:disabled {
-      opacity: 0.6;
+    /* 🔥 INPUT GLOW ON FOCUS */
+    input:focus {
+      box-shadow: 0 0 20px gold;
     }
 
     button {
       width: 100%;
-      padding: 14px;
-      margin-top: 15px;
-      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+      border-radius: 10px;
       border: none;
-      font-size: 16px;
       font-weight: bold;
-      background: linear-gradient(to right, orange, gold);
+      background: linear-gradient(to right, gold, orange);
       color: black;
       cursor: pointer;
       transition: 0.2s;
     }
 
     button:hover {
+      box-shadow: 0 0 10px gold;
       transform: scale(1.03);
     }
 
     #backBtn {
       background: #1e293b;
       color: white;
-      margin-bottom: 10px;
     }
 
     .letters {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-      gap: 10px;
-      margin-top: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(42px, 1fr));
+      gap: 8px;
+      margin-top: 10px;
     }
 
     .letter-card {
-      background: #020617;
-      border-radius: 12px;
-      padding: 10px 0;
+      background: rgba(2,6,23,0.7);
+      border-radius: 10px;
+      padding: 8px 0;
       text-align: center;
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: 0.2s;
-    }
 
-    .letter-card:hover {
-      border-color: gold;
-      transform: scale(1.05);
+      border: 1px solid rgba(255,215,0,0.15);
+      box-shadow: 0 0 40px rgba(255, 217, 0, 0.1);
     }
 
     .letter-card input {
       accent-color: gold;
-      transform: scale(1.2);
-      margin-bottom: 5px;
-    }
-
-    .letter-card span {
-      display: block;
-      font-size: 14px;
     }
 
     #quizBox {
@@ -127,206 +146,174 @@
       text-align: center;
     }
 
-    #question {
-      font-size: 28px;
-      margin-bottom: 15px;
-    }
-
-    /* 🔥 RESULT BOX */
     .result-box {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 10px;
-      font-size: 16px;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
       display: none;
     }
 
     .correct {
-      background: rgba(34,197,94,0.2);
+      background: rgba(34,197,94,0.25);
       border: 1px solid #22c55e;
-      color: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
     }
 
     .wrong {
-      background: rgba(239,68,68,0.2);
+      background: rgba(239,68,68,0.25);
       border: 1px solid #ef4444;
-      color: #ef4444;
+      box-shadow: 0 0 8px #ef4444;
     }
 
-    .score {
-      margin-top: 12px;
-      opacity: 0.8;
+    /* DESKTOP */
+    @media (min-width: 900px) {
+      .side {
+        display: block;
+      }
+
+      body {
+        background: #020617;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="main">
 
-  <h1>🔥 Alphabet Trainer</h1>
+  <div class="side"></div>
 
-  <!-- START -->
-  <div class="box" id="startBox">
-    <p>Mode</p>
-    <select id="modeSelect">
-      <option value="encode">Encode (A → 1)</option>
-      <option value="decode">Decode (1 → A)</option>
-      <option value="mixed">Mixed</option>
-    </select>
+  <div class="content">
 
-    <p style="margin-top:10px;">Letters</p>
+    <h1>🔥 Alphabet Trainer</h1>
 
-    <label>
-      <input type="checkbox" id="selectAll" checked onchange="toggleAll()"> Select All
-    </label>
+    <div class="box" id="startBox">
 
-    <div class="letters" id="letterContainer"></div>
+      <p>Mode</p>
+      <select id="modeSelect">
+        <option value="encode">Encode</option>
+        <option value="decode">Decode</option>
+        <option value="mixed">Mixed</option>
+      </select>
 
-    <button onclick="startQuiz()">Start Practice</button>
-  </div>
+      <p style="margin-top:10px;">Letters</p>
 
-  <!-- QUIZ -->
-  <div class="box" id="quizBox">
+      <label>
+        <input type="checkbox" id="selectAll" checked onchange="toggleAll()"> Select All
+      </label>
 
-    <button id="backBtn" onclick="goBack()">⬅ Back</button>
+      <div class="letters" id="letterContainer"></div>
 
-    <h2 id="question">Q</h2>
+      <button onclick="startQuiz()">Start Practice</button>
+    </div>
 
-    <input type="text" id="answer">
+    <div class="box" id="quizBox">
 
-    <button id="actionBtn" onclick="handleAction()">Submit</button>
+      <button id="backBtn" onclick="goBack()">⬅ Back</button>
 
-    <!-- RESULT UI -->
-    <div id="resultBox" class="result-box"></div>
+      <h2 id="question"></h2>
 
-    <p class="score">Score: <span id="score">0</span></p>
+      <input type="text" id="answer">
+
+      <button id="actionBtn" onclick="handleAction()">Submit</button>
+
+      <div id="resultBox" class="result-box"></div>
+
+      <p>Score: <span id="score">0</span></p>
+    </div>
+
   </div>
 
 </div>
 
 <script>
-let score = 0;
-let correctAnswer = "";
-let mode = "mixed";
-let letters = [];
-let answered = false;
+let score = 0, correctAnswer = "", mode = "mixed", letters = [], answered = false;
 
-// generate letters
 let container = document.getElementById("letterContainer");
 for (let i = 65; i <= 90; i++) {
-  let letter = String.fromCharCode(i);
-
-  let div = document.createElement("div");
-  div.className = "letter-card";
-
-  div.innerHTML = `
-    <input type="checkbox" class="letterBox" value="${letter}" checked>
-    <span>${letter}</span>
-  `;
-
-  container.appendChild(div);
+  let l = String.fromCharCode(i);
+  container.innerHTML += `
+    <div class="letter-card">
+      <input type="checkbox" class="letterBox" value="${l}" checked>
+      <div>${l}</div>
+    </div>`;
 }
 
 function toggleAll() {
-  let checked = document.getElementById("selectAll").checked;
-  document.querySelectorAll(".letterBox").forEach(cb => cb.checked = checked);
+  let c = document.getElementById("selectAll").checked;
+  document.querySelectorAll(".letterBox").forEach(cb => cb.checked = c);
 }
 
 function startQuiz() {
-  mode = document.getElementById("modeSelect").value;
+  mode = modeSelect.value;
+  letters = [...document.querySelectorAll(".letterBox:checked")].map(cb => cb.value);
+  if (!letters.length) return alert("Select letters!");
 
-  letters = [];
-  document.querySelectorAll(".letterBox:checked").forEach(cb => {
-    letters.push(cb.value);
-  });
-
-  if (letters.length === 0) {
-    alert("Select at least one letter!");
-    return;
-  }
-
-  document.getElementById("startBox").style.display = "none";
-  document.getElementById("quizBox").style.display = "block";
-
+  startBox.style.display = "none";
+  quizBox.style.display = "block";
   newQuestion();
 }
 
 function goBack() {
-  document.getElementById("quizBox").style.display = "none";
-  document.getElementById("startBox").style.display = "block";
+  quizBox.style.display = "none";
+  startBox.style.display = "block";
 }
 
-function getLetterPosition(letter) {
-  return letter.charCodeAt(0) - 64;
-}
-
-function getLetter(num) {
-  return String.fromCharCode(64 + num);
-}
+function getPos(l){ return l.charCodeAt(0)-64 }
 
 function newQuestion() {
   answered = false;
+  answer.disabled = false;
+  resultBox.style.display = "none";
 
-  document.getElementById("answer").disabled = false;
-  document.getElementById("resultBox").style.display = "none";
+  let l = letters[Math.floor(Math.random()*letters.length)];
+  let m = mode==="mixed" ? (Math.random()>0.5?"encode":"decode") : mode;
 
-  let selectedLetter = letters[Math.floor(Math.random() * letters.length)];
-  let selectedMode = mode;
-
-  if (mode === "mixed") {
-    selectedMode = Math.random() > 0.5 ? "encode" : "decode";
-  }
-
-  if (selectedMode === "encode") {
-    correctAnswer = getLetterPosition(selectedLetter);
-    document.getElementById("question").innerText = selectedLetter + " = ?";
+  if(m==="encode"){
+    correctAnswer = getPos(l);
+    question.innerText = l+" = ?";
   } else {
-    let num = getLetterPosition(selectedLetter);
-    correctAnswer = selectedLetter;
-    document.getElementById("question").innerText = num + " = ?";
+    correctAnswer = l;
+    question.innerText = getPos(l)+" = ?";
   }
 
-  document.getElementById("answer").value = "";
-  document.getElementById("actionBtn").innerText = "Submit";
-  document.getElementById("answer").focus();
+  answer.value="";
+  actionBtn.innerText="Submit";
 }
 
-function handleAction() {
-  if (!answered) {
-    checkAnswer();
-  } else {
-    newQuestion();
-  }
+function handleAction(){
+  if(!answered) checkAnswer();
+  else newQuestion();
 }
 
-function checkAnswer() {
-  let user = document.getElementById("answer").value.toUpperCase();
-  let box = document.getElementById("resultBox");
+function checkAnswer(){
+  let u = answer.value.toUpperCase();
 
-  if (user == correctAnswer) {
+  if(u==correctAnswer){
     score++;
-    box.className = "result-box correct";
-    box.innerText = "✅ Correct!";
+    resultBox.className="result-box correct";
+    resultBox.innerText="✅ Correct!";
   } else {
-    box.className = "result-box wrong";
-    box.innerText = "❌ Wrong! Correct: " + correctAnswer;
+    resultBox.className="result-box wrong";
+    resultBox.innerText="❌ Correct: "+correctAnswer;
   }
 
-  box.style.display = "block";
-  document.getElementById("score").innerText = score;
-
-  document.getElementById("answer").disabled = true;
-  document.getElementById("actionBtn").innerText = "Next";
-
-  answered = true;
+  resultBox.style.display="block";
+  scoreEl.innerText=score;
+  answer.disabled=true;
+  actionBtn.innerText="Next";
+  answered=true;
 }
 
-// enter key
-document.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    handleAction();
-  }
+let answer = document.getElementById("answer");
+let question = document.getElementById("question");
+let resultBox = document.getElementById("resultBox");
+let actionBtn = document.getElementById("actionBtn");
+let scoreEl = document.getElementById("score");
+
+document.addEventListener("keydown", e=>{
+  if(e.key==="Enter") handleAction();
 });
 </script>
 
